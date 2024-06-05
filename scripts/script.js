@@ -7,7 +7,6 @@ class Producto {
         this._precio = precio;
     }
 
-    // Métodos getter para acceder a las propiedades del producto
     get getId() {
         return this._id;
     }
@@ -21,7 +20,6 @@ class Producto {
         return this._precio;
     }
 
-    // Métodos setter para modificar las propiedades del producto
     set setNombre(nombre) {
         this._nombre = nombre;
     }
@@ -42,8 +40,7 @@ class Venta {
         this._cantidad = cantidad;
         this._fecha = fecha;
     }
-    
-    // Métodos getter para acceder a las propiedades de la venta
+
     get getId() {
         return this._id;
     }
@@ -68,7 +65,6 @@ class Mesero {
         this._nombre = nombre;
     }
 
-    // Métodos getter para acceder a las propiedades del mesero
     get getRut() {
         return this._rut;
     }
@@ -76,7 +72,6 @@ class Mesero {
         return this._nombre;
     }
 
-    // Métodos setter para modificar las propiedades del mesero
     set setRut(rut) {
         this._rut = rut;
     }
@@ -92,7 +87,6 @@ class Categoria {
         this._nombre = nombre;
     }
 
-    // Métodos getter para acceder a las propiedades de la categoría
     get getId() {
         return this._id;
     }
@@ -100,13 +94,11 @@ class Categoria {
         return this._nombre;
     }
 
-    // Métodos setter para modificar las propiedades de la categoría
     set setNombre(nombre) {
         this._nombre = nombre;
     }
 }
 
-// Datos iniciales de productos
 let productos = [
     new Producto(1, 'Café Espresso', new Categoria(1, 'Bebestible'), 1500),
     new Producto(2, 'Capuccino', new Categoria(1, 'Bebestible'), 2000),
@@ -121,26 +113,22 @@ let productos = [
     new Producto(11, 'Helado de Vainilla', new Categoria(2, 'Comestible'), 2000)
 ];
 
-// Datos iniciales de meseros
 let meseros = [
     new Mesero('18.232.243-5', 'Eduardo Gomez'),
     new Mesero('19.132.254-5', 'Juan Pérez'),
     new Mesero('20.231.567-K', 'Melissa Casio')
 ];
 
-// Datos iniciales de categorías
 let categorias = [
     new Categoria(1, 'Bebestible'),
     new Categoria(2, 'Comestible')
 ];
 
-// Array para almacenar ventas
 let ventas = [];
 
-// Función para actualizar el dropdown de productos
 function actualizarDropdownProductos() {
     const comboBox1 = document.getElementById('nombreProducto');
-    comboBox1.innerHTML = '<option value="" selected disabled>Selecciona un producto</option>'; // Agregar la opción por defecto
+    comboBox1.innerHTML = '<option value="" selected disabled>Selecciona un producto</option>';
     productos.forEach(producto => {
         const optionElement = document.createElement('option');
         optionElement.textContent = `${producto.getNombre} ($${producto.getPrecio} CLP)`;
@@ -149,22 +137,26 @@ function actualizarDropdownProductos() {
     });
 }
 
-// Función para actualizar el dropdown de categorías
 function actualizarDropdownCategorias() {
     const comboBox2 = document.getElementById('nuevaCategoriaProducto');
-    comboBox2.innerHTML = '<option value="" selected disabled>Selecciona una categoría</option>'; // Agregar la opción por defecto
+    const comboBoxEditar = document.getElementById('editarCategoriaProducto');
+    comboBox2.innerHTML = '<option value="" selected disabled>Selecciona una categoría</option>';
+    comboBoxEditar.innerHTML = '<option value="" selected disabled>Selecciona una categoría</option>';
     categorias.forEach(categoria => {
         const optionElement = document.createElement('option');
+        const optionElementEditar = document.createElement('option');
         optionElement.textContent = categoria.getNombre;
         optionElement.value = categoria.getId;
+        optionElementEditar.textContent = categoria.getNombre;
+        optionElementEditar.value = categoria.getId;
         comboBox2.appendChild(optionElement);
+        comboBoxEditar.appendChild(optionElementEditar);
     });
 }
 
-// Función para actualizar el dropdown de meseros
 function actualizarDropdownMeseros() {
     const comboBox3 = document.getElementById('nombreMesero');
-    comboBox3.innerHTML = '<option value="" selected disabled>Selecciona un mesero</option>'; // Agregar la opción por defecto
+    comboBox3.innerHTML = '<option value="" selected disabled>Selecciona un mesero</option>';
     meseros.forEach(mesero => {
         const optionElement = document.createElement('option');
         optionElement.textContent = mesero.getNombre;
@@ -173,32 +165,27 @@ function actualizarDropdownMeseros() {
     });
 }
 
-// Llamar las funciones para llenar los dropdowns inicialmente
 actualizarDropdownProductos();
 actualizarDropdownCategorias();
 actualizarDropdownMeseros();
 
-// Función para mostrar los productos en la tabla del modal
 let mostrarProductos = function() {
     let tbody = document.getElementById('tablaProductos').getElementsByTagName('tbody')[0];
-    tbody.innerHTML = ''; // Limpiar la tabla antes de llenarla
-
+    tbody.innerHTML = '';
     productos.forEach((producto, index) => {
         setTimeout(() => {
-            let row = tbody.insertRow(); // Crear una nueva fila
-            row.classList.add('fade-in'); // Añadir la clase de animación
-            row.insertCell(0).innerText = producto.getId; // Insertar celda para el ID
-            row.insertCell(1).innerText = producto.getNombre; // Insertar celda para el nombre
-            row.insertCell(2).innerText = producto.getCategoria.getNombre; // Insertar celda para categoría
-            row.insertCell(3).innerText = `$${producto.getPrecio}`; // Insertar celda para el precio
-        }, index * 10); // Retraso de 10ms por cada fila
+            let row = tbody.insertRow();
+            row.classList.add('fade-in');
+            row.insertCell(0).innerText = producto.getId;
+            row.insertCell(1).innerText = producto.getNombre;
+            row.insertCell(2).innerText = producto.getCategoria.getNombre;
+            row.insertCell(3).innerText = `$${producto.getPrecio}`;
+        }, index * 10);
     });
 }
 
-// Evento para mostrar productos en el modal
 document.getElementById('verProductos').addEventListener('shown.bs.modal', mostrarProductos);
 
-// Validación de formularios
 (function () {
     'use strict'
     const forms = document.querySelectorAll('.needs-validation, .needs-validation2, .needs-validation3, .needs-validation4')
@@ -220,7 +207,6 @@ document.getElementById('verProductos').addEventListener('shown.bs.modal', mostr
         });
 })();
 
-// Función para validar e ingresar una venta
 function validarYIngresarVenta() {
     const form = document.querySelector('.needs-validation');
     const cantidad = document.getElementById('cantidad').value;
@@ -239,10 +225,8 @@ function validarYIngresarVenta() {
     }
 }
 
-// Contador para el ID de las ventas
 let ventaIdCounter = 1;
 
-// Función para ingresar una nueva venta
 let ingresarVenta = function() {
     let productoId = document.getElementById('nombreProducto').value;
     let cantidad = parseInt(document.getElementById('cantidad').value);
@@ -268,11 +252,9 @@ let ingresarVenta = function() {
     }
 }
 
-// Función para mostrar las ventas en la tabla
 let mostrarVentas = function() {
     let tbody = document.getElementById('tablaVentas').getElementsByTagName('tbody')[0];
-    tbody.innerHTML = ''; // Limpiar la tabla antes de llenarla
-
+    tbody.innerHTML = '';
     ventas.forEach(venta => {
         let row = tbody.insertRow();
         row.insertCell(0).innerText = venta.getId;
@@ -284,7 +266,6 @@ let mostrarVentas = function() {
     });
 };
 
-// Función para validar y agregar un nuevo producto
 function validarYAgregarProducto() {
     const form = document.querySelector('.needs-validation2');
     if (form.checkValidity()) {
@@ -297,7 +278,6 @@ function validarYAgregarProducto() {
     }
 }
 
-// Función para agregar un nuevo producto
 function agregarProducto() {
     let nombre = document.getElementById('nuevoNombreProducto').value;
     let categoriaId = document.getElementById('nuevaCategoriaProducto').value;
@@ -307,10 +287,9 @@ function agregarProducto() {
 
     productos.push(new Producto(id, nombre, categoriaSeleccionada, precio));
     actualizarTablaProductos();
-    actualizarDropdownProductos(); // Actualizar el dropdown de productos
+    actualizarDropdownProductos();
 }
 
-// Función para validar y agregar un nuevo mesero
 function validarYAgregarMesero() {
     const form = document.querySelector('.needs-validation3');
     if (form.checkValidity()) {
@@ -323,17 +302,15 @@ function validarYAgregarMesero() {
     }
 }
 
-// Función para agregar un nuevo mesero
 function agregarMesero() {
     let rut = document.getElementById('nuevoRutMesero').value;
     let nombre = document.getElementById('nuevoNombreMesero').value;
 
     meseros.push(new Mesero(rut, nombre));
     actualizarTablaMeseros();
-    actualizarDropdownMeseros(); // Actualizar el dropdown de meseros
+    actualizarDropdownMeseros();
 }
 
-// Función para validar y agregar una nueva categoría
 function validarYAgregarCategoria() {
     const form = document.querySelector('.needs-validation4');
     if (form.checkValidity()) {
@@ -346,36 +323,28 @@ function validarYAgregarCategoria() {
     }
 }
 
-// Función para agregar una nueva categoría
 function agregarCategoria() {
     let nombre = document.getElementById('nuevoNombreCategoria').value;
     let id = categorias.length ? categorias[categorias.length - 1].getId + 1 : 1;
 
     categorias.push(new Categoria(id, nombre));
     actualizarTablaCategorias();
-    actualizarDropdownCategorias(); // Actualizar el dropdown de categorías
+    actualizarDropdownCategorias();
 }
 
-// Evento para manejar la adición de un nuevo producto
 document.getElementById('agregarProductoButton').addEventListener('click', validarYAgregarProducto);
-
-// Evento para manejar la adición de un nuevo mesero
 document.getElementById('agregarMeseroButton').addEventListener('click', validarYAgregarMesero);
-
-// Evento para manejar la adición de una nueva categoría
 document.getElementById('agregarCategoriaButton').addEventListener('click', validarYAgregarCategoria);
 
-// Evento para cargar las tablas de meseros, productos y categorías al cargar la página
 document.addEventListener('DOMContentLoaded', function () {
     actualizarTablaMeseros();
     actualizarTablaProductos();
     actualizarTablaCategorias();
 });
 
-// Función para actualizar la tabla de meseros
 function actualizarTablaMeseros() {
     let tbody = document.getElementById('tablaMeseros').getElementsByTagName('tbody')[0];
-    tbody.innerHTML = ''; // Limpiar la tabla antes de llenarla
+    tbody.innerHTML = '';
     meseros.forEach((mesero, index) => {
         let row = tbody.insertRow();
         row.insertCell(0).innerText = mesero.getRut;
@@ -384,8 +353,10 @@ function actualizarTablaMeseros() {
         let editButton = document.createElement('button');
         editButton.innerHTML = '<i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i>';
         editButton.className = 'btn btn-primary';
+        editButton.setAttribute('data-bs-toggle', 'modal');
+        editButton.setAttribute('data-bs-target', '#modalEditarMesero');
         editButton.onclick = function () {
-            editarMesero(index);
+            abrirModalEditarMesero(index);
         };
         editCell.appendChild(editButton);
 
@@ -400,32 +371,39 @@ function actualizarTablaMeseros() {
     });
 }
 
-// Función para editar un mesero
-function editarMesero(index) {
+function abrirModalEditarMesero(index) {
     let mesero = meseros[index];
-    let newRut = prompt("Editar RUT:", mesero.getRut);
-    if (newRut !== null) {
-        mesero.setRut = newRut;
-    }
-    let newNombre = prompt("Editar Nombre:", mesero.getNombre);
-    if (newNombre !== null) {
-        mesero.setNombre = newNombre;
-    }
-    actualizarTablaMeseros();
-    actualizarDropdownMeseros(); // Actualizar el dropdown de meseros
+    document.getElementById('editarRutMesero').value = mesero.getRut;
+    document.getElementById('editarNombreMesero').value = mesero.getNombre;
+    document.getElementById('formEditarMesero').onsubmit = function(event) {
+        event.preventDefault();
+        editarMesero(index);
+        $('#modalEditarMesero').modal('hide');
+        Swal.fire('Mesero modificado', 'El mesero ha sido modificado correctamente', 'success');
+    };
+    $('#modalEditarMesero').modal('show');
 }
 
-// Función para eliminar un mesero
+function editarMesero(index) {
+    let mesero = meseros[index];
+    let newRut = document.getElementById('editarRutMesero').value;
+    let newNombre = document.getElementById('editarNombreMesero').value;
+    mesero.setRut = newRut;
+    mesero.setNombre = newNombre;
+    actualizarTablaMeseros();
+    actualizarDropdownMeseros();
+}
+
 function eliminarMesero(index) {
     meseros.splice(index, 1);
     actualizarTablaMeseros();
-    actualizarDropdownMeseros(); // Actualizar el dropdown de meseros
+    actualizarDropdownMeseros();
+    Swal.fire('Mesero eliminado', 'El mesero ha sido eliminado correctamente', 'success');
 }
 
-// Función para actualizar la tabla de productos
 function actualizarTablaProductos() {
     let tbody = document.getElementById('tablaProductos2').getElementsByTagName('tbody')[0];
-    tbody.innerHTML = ''; // Limpiar la tabla antes de llenarla
+    tbody.innerHTML = '';
     productos.forEach((producto, index) => {
         let row = tbody.insertRow();
         row.insertCell(0).innerText = producto.getId;
@@ -437,8 +415,10 @@ function actualizarTablaProductos() {
         let editButton = document.createElement('button');
         editButton.innerHTML = '<i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i>';
         editButton.className = 'btn btn-primary';
+        editButton.setAttribute('data-bs-toggle', 'modal');
+        editButton.setAttribute('data-bs-target', '#modalEditarProducto');
         editButton.onclick = function () {
-            editarProducto(index);
+            abrirModalEditarProducto(index);
         };
         editCell.appendChild(editButton);
 
@@ -453,37 +433,43 @@ function actualizarTablaProductos() {
     });
 }
 
-// Función para editar un producto
-function editarProducto(index) {
+function abrirModalEditarProducto(index) {
     let producto = productos[index];
-    let newNombre = prompt("Editar Nombre:", producto.getNombre);
-    if (newNombre !== null) {
-        producto.setNombre = newNombre;
-    }
-    let newCategoriaId = prompt("Editar Categoría (ID):", producto.getCategoria.getId);
-    let newCategoria = categorias.find(cat => cat.getId == newCategoriaId);
-    if (newCategoria !== null) {
-        producto.setCategoria = newCategoria;
-    }
-    let newPrecio = prompt("Editar Precio:", producto.getPrecio);
-    if (newPrecio !== null) {
-        producto.setPrecio = parseInt(newPrecio);
-    }
-    actualizarTablaProductos();
-    actualizarDropdownProductos(); // Actualizar el dropdown de productos
+    document.getElementById('editarNombreProducto').value = producto.getNombre;
+    document.getElementById('editarCategoriaProducto').value = producto.getCategoria.getId;
+    document.getElementById('editarPrecioProducto').value = producto.getPrecio;
+    document.getElementById('formEditarProducto').onsubmit = function(event) {
+        event.preventDefault();
+        editarProducto(index);
+        $('#modalEditarProducto').modal('hide');
+        Swal.fire('Producto modificado', 'El producto ha sido modificado correctamente', 'success');
+    };
+    $('#modalEditarProducto').modal('show');
 }
 
-// Función para eliminar un producto
+function editarProducto(index) {
+    let producto = productos[index];
+    let newNombre = document.getElementById('editarNombreProducto').value;
+    let newCategoriaId = document.getElementById('editarCategoriaProducto').value;
+    let newCategoria = categorias.find(cat => cat.getId == newCategoriaId);
+    let newPrecio = document.getElementById('editarPrecioProducto').value;
+    producto.setNombre = newNombre;
+    producto.setCategoria = newCategoria;
+    producto.setPrecio = parseInt(newPrecio);
+    actualizarTablaProductos();
+    actualizarDropdownProductos();
+}
+
 function eliminarProducto(index) {
     productos.splice(index, 1);
     actualizarTablaProductos();
-    actualizarDropdownProductos(); // Actualizar el dropdown de productos
+    actualizarDropdownProductos();
+    Swal.fire('Producto eliminado', 'El producto ha sido eliminado correctamente', 'success');
 }
 
-// Función para actualizar la tabla de categorías
 function actualizarTablaCategorias() {
     let tbody = document.getElementById('tablaCategorias').getElementsByTagName('tbody')[0];
-    tbody.innerHTML = ''; // Limpiar la tabla antes de llenarla
+    tbody.innerHTML = '';
     categorias.forEach((categoria, index) => {
         let row = tbody.insertRow();
         row.insertCell(0).innerText = categoria.getId;
@@ -492,8 +478,10 @@ function actualizarTablaCategorias() {
         let editButton = document.createElement('button');
         editButton.innerHTML = '<i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i>';
         editButton.className = 'btn btn-primary';
+        editButton.setAttribute('data-bs-toggle', 'modal');
+        editButton.setAttribute('data-bs-target', '#modalEditarCategoria');
         editButton.onclick = function () {
-            editarCategoria(index);
+            abrirModalEditarCategoria(index);
         };
         editCell.appendChild(editButton);
 
@@ -508,20 +496,29 @@ function actualizarTablaCategorias() {
     });
 }
 
-// Función para editar una categoría
-function editarCategoria(index) {
+function abrirModalEditarCategoria(index) {
     let categoria = categorias[index];
-    let newNombre = prompt("Editar Nombre:", categoria.getNombre);
-    if (newNombre !== null) {
-        categoria.setNombre = newNombre;
-    }
-    actualizarTablaCategorias();
-    actualizarDropdownCategorias(); // Actualizar el dropdown de categorías
+    document.getElementById('editarNombreCategoria').value = categoria.getNombre;
+    document.getElementById('formEditarCategoria').onsubmit = function(event) {
+        event.preventDefault();
+        editarCategoria(index);
+        $('#modalEditarCategoria').modal('hide');
+        Swal.fire('Categoría modificada', 'La categoría ha sido modificada correctamente', 'success');
+    };
+    $('#modalEditarCategoria').modal('show');
 }
 
-// Función para eliminar una categoría
+function editarCategoria(index) {
+    let categoria = categorias[index];
+    let newNombre = document.getElementById('editarNombreCategoria').value;
+    categoria.setNombre = newNombre;
+    actualizarTablaCategorias();
+    actualizarDropdownCategorias();
+}
+
 function eliminarCategoria(index) {
     categorias.splice(index, 1);
     actualizarTablaCategorias();
-    actualizarDropdownCategorias(); // Actualizar el dropdown de categorías
+    actualizarDropdownCategorias();
+    Swal.fire('Categoría eliminada', 'La categoría ha sido eliminada correctamente', 'success');
 }
