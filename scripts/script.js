@@ -522,3 +522,44 @@ function eliminarCategoria(index) {
     actualizarDropdownCategorias();
     Swal.fire('Categoría eliminada', 'La categoría ha sido eliminada correctamente', 'success');
 }
+
+// Función para buscar en las tablas
+function buscarEnTabla(inputId, tablaId) {
+    let input = document.getElementById(inputId);
+    let filter = input.value.toLowerCase();
+    let tabla = document.getElementById(tablaId);
+    let tr = tabla.getElementsByTagName('tr');
+
+    for (let i = 1; i < tr.length; i++) {
+        let tds = tr[i].getElementsByTagName('td');
+        let match = false;
+        for (let j = 0; j < tds.length; j++) {
+            if (tds[j]) {
+                let txtValue = tds[j].textContent || tds[j].innerText;
+                if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                    match = true;
+                    break;
+                }
+            }
+        }
+        if (match) {
+            tr[i].style.display = "";
+        } else {
+            tr[i].style.display = "none";
+        }
+    }
+}
+
+// Evento de búsqueda en tiempo real para cada tabla
+document.getElementById('buscarVentas').addEventListener('keyup', function () {
+    buscarEnTabla('buscarVentas', 'tablaVentas');
+});
+document.getElementById('buscarMeseros').addEventListener('keyup', function () {
+    buscarEnTabla('buscarMeseros', 'tablaMeseros');
+});
+document.getElementById('buscarProductos').addEventListener('keyup', function () {
+    buscarEnTabla('buscarProductos', 'tablaProductos2');
+});
+document.getElementById('buscarCategorias').addEventListener('keyup', function () {
+    buscarEnTabla('buscarCategorias', 'tablaCategorias');
+});
