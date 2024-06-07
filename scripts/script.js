@@ -214,7 +214,7 @@ let mostrarProductos = function() {
 
 document.getElementById('verProductos').addEventListener('shown.bs.modal', mostrarProductos);
 
-(function () {
+/* (function () {
     'use strict'
     const forms = document.querySelectorAll('.needs-validation, .needs-validation2, .needs-validation3, .needs-validation4');
     Array.prototype.slice.call(forms)
@@ -233,9 +233,109 @@ document.getElementById('verProductos').addEventListener('shown.bs.modal', mostr
                 form.classList.add('was-validated');
             }, false);
         });
+})(); */
+
+(function () {
+    'use strict'
+
+    const forms = document.querySelectorAll('.needs-validation2');
+
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                const cantidad = document.getElementById('cantidad2')?.value;
+                if (!form.checkValidity() || (cantidad !== undefined && cantidad <= 0)) {
+                    if (cantidad !== undefined && cantidad <= 0) {
+                        document.getElementById('cantidad2').setCustomValidity('La cantidad debe ser mayor que cero.');
+                    } else {
+                        document.getElementById('cantidad2')?.setCustomValidity('');
+                    }
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
 })();
 
-function validarYIngresarVenta() {
+
+(function () {
+    'use strict'
+
+    const forms = document.querySelectorAll('.needs-validation');
+
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                const cantidad = document.getElementById('cantidad')?.value;
+                if (!form.checkValidity() || (cantidad !== undefined && cantidad <= 0)) {
+                    if (cantidad !== undefined && cantidad <= 0) {
+                        document.getElementById('cantidad').setCustomValidity('La cantidad debe ser mayor que cero.');
+                    } else {
+                        document.getElementById('cantidad')?.setCustomValidity('');
+                    }
+                }
+                ingresarVenta();
+                form.reset();
+                Swal.fire('Venta ingresada', 'La venta ha sido ingresada correctamente', 'success');
+                form.classList.add('was-validated');
+            }, false);
+        });
+})();
+
+(function () {
+    'use strict'
+
+    const forms = document.querySelectorAll('.needs-validation3');
+
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                const cantidad = document.getElementById('cantidad3')?.value;
+                if (!form.checkValidity() || (cantidad !== undefined && cantidad <= 0)) {
+                    if (cantidad !== undefined && cantidad <= 0) {
+                        document.getElementById('cantidad3').setCustomValidity('La cantidad debe ser mayor que cero.');
+                    } else {
+                        document.getElementById('cantidad3')?.setCustomValidity('');
+                    }
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+})();
+
+
+(function () {
+    'use strict'
+
+    const forms = document.querySelectorAll('.needs-validation4');
+
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                const cantidad = document.getElementById('cantidad4')?.value;
+                if (!form.checkValidity() || (cantidad !== undefined && cantidad <= 0)) {
+                    if (cantidad !== undefined && cantidad <= 0) {
+                        document.getElementById('cantidad4').setCustomValidity('La cantidad debe ser mayor que cero.');
+                    } else {
+                        document.getElementById('cantidad4')?.setCustomValidity('');
+                    }
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+})();
+
+
+
+
+/* function validarYIngresarVenta() {
     const form = document.querySelector('.needs-validation');
     const cantidad = document.getElementById('cantidad').value;
     if (form.checkValidity() && cantidad > 0) {
@@ -251,7 +351,7 @@ function validarYIngresarVenta() {
             document.getElementById('cantidad').setCustomValidity('');
         }
     }
-}
+} */
 
 let ventaIdCounter = 1;
 
