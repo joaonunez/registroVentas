@@ -38,6 +38,25 @@ class Venta {
 }
 
 let ventas = [];
+
+function validarYIngresarVenta() {
+    const form = document.querySelector('.needs-validation-ventas');
+    const cantidad = document.getElementById('cantidad').value;
+    if (form.checkValidity() && cantidad > 0) {
+        ingresarVenta();
+        form.reset();
+        form.classList.remove('was-validated');
+        Swal.fire('Venta ingresada', 'La venta ha sido ingresada correctamente', 'success');
+    } else {
+        form.classList.add('was-validated');
+        if (cantidad <= 0) {
+            document.getElementById('cantidad').setCustomValidity('La cantidad debe ser mayor que cero.');
+        } else {
+            document.getElementById('cantidad').setCustomValidity('');
+        }
+    }
+}
+
 let ventaIdCounter = 1;
 
 function ingresarVenta() {
@@ -65,7 +84,10 @@ function ingresarVenta() {
     }
 }
 
-function mostrarVentas() {
+
+
+
+let mostrarVentas = function() {
     let tbody = document.getElementById('tablaVentas').getElementsByTagName('tbody')[0];
     tbody.innerHTML = '';
     ventas.forEach((venta, index) => {
@@ -97,7 +119,7 @@ function mostrarVentas() {
         };
         deleteCell.appendChild(deleteButton);
     });
-}
+};
 
 function abrirModalEditarVenta(index) {
     let venta = ventas[index];
@@ -136,3 +158,9 @@ function eliminarVenta(index) {
     mostrarVentas();
     Swal.fire('Venta eliminada', 'La venta ha sido eliminada correctamente', 'success');
 }
+
+document.getElementById('ingresarVentaButton').addEventListener('click', validarYIngresarVenta);
+
+document.addEventListener('DOMContentLoaded', function () {
+    mostrarVentas();
+});
