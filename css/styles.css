@@ -1,35 +1,39 @@
+/* Definición de la animación fadeIn */
 @keyframes fadeIn {
     from {
-        opacity: 0;
+        opacity: 0; /* La animación comienza con opacidad 0 (invisible) */
     }
     to {
-        opacity: 1;
+        opacity: 1; /* La animación termina con opacidad 1 (completamente visible) */
     }
 }
+
+/* Clase para aplicar la animación fadeIn */
 .fade-in {
-    animation: fadeIn 0.5s ease-in-out;
+    animation: fadeIn 0.5s ease-in-out; /* Aplica la animación fadeIn con duración de 0.5 segundos y un efecto ease-in-out */
 }
 
+/* Clase para tablas con desplazamiento horizontal */
 .miTabla {
-    overflow-x: auto; /* Añadir desplazamiento horizontal */
-    white-space: nowrap; /* Evitar que el contenido se envuelva */
+    overflow-x: auto; /* Añadir desplazamiento horizontal para contenido que excede el ancho del contenedor */
+    white-space: nowrap; /* Evitar que el contenido se envuelva, manteniéndolo en una sola línea */
 }
 
-
+/* Estilo del cuerpo de la página */
 body {
-    background-color: hsl(var(--background));
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4rem;
-  }
-  
-  .tab {
-    width: 200px;
-    height: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.5rem;
-  }
-  
+    background-color: hsl(var(--background)); /* Establecer el color de fondo usando una variable HSL */
+    display: flex; /* Usar Flexbox para la disposición de los elementos */
+    flex-direction: column; /* Disponer los elementos en una columna */
+    align-items: center; /* Centrar los elementos horizontalmente */
+    gap: 4rem; /* Añadir un espacio de 4rem entre los elementos */
+}
+
+/* Estilo para elementos con la clase 'tab' */
+.tab {
+    width: 200px; /* Ancho de 200 píxeles */
+    height: 100px; /* Altura de 100 píxeles */
+    display: flex; /* Usar Flexbox para la disposición de los elementos */
+    justify-content: center; /* Centrar los elementos internamente en el eje horizontal */
+    align-items: center; /* Centrar los elementos internamente en el eje vertical */
+    padding: 0.5rem; /* Añadir un padding de 0.5rem alrededor del contenido */
+}
