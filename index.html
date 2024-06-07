@@ -96,7 +96,8 @@
                     <h3>Ventas Registradas en el Sistema</h3>
                 </div>
                 <div class="mb-3 col-10 col-xxl-3">
-                    <input type="text" id="buscarVentas" class="form-control" placeholder="Buscar en ventas...">
+                    <label for="buscarVentas" class="form-label justify-content-start">Buscar venta por ID</label>
+                    <input type="text" id="buscarVentas" class="form-control" placeholder="Buscar venta por ID...">
                 </div>
                 <div class="miTabla mb-5 col-12 m-auto">
                     <table class="container table table-striped table-bordered border-info text-center" id="tablaVentas">
@@ -108,6 +109,7 @@
                                 <th>Cantidad</th>
                                 <th>Fecha</th>
                                 <th>Total</th>
+                                <th colspan="2">ACCIONES</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -120,7 +122,8 @@
                     <h3>Productos</h3>
                 </div>
                 <div class="mb-3 col-xxl-3 col-10">
-                    <input type="text" id="buscarProductos" class="form-control" placeholder="Buscar en productos...">
+                    <label for="buscarProductos" class="form-label justify-content-start">Buscar producto por ID</label>
+                    <input type="text" id="buscarProductos" class="form-control" placeholder="Buscar producto por ID...">
                 </div>
                 <div class="miTabla mb-5 col-12 m-auto">
                     <table class="container table table-striped table-bordered border-info text-center" id="tablaProductos2">
@@ -175,7 +178,8 @@
                     <h3>Meseros</h3>
                 </div>
                 <div class="mb-3 col-10 col-xxl-3">
-                    <input type="text" id="buscarMeseros" class="form-control" placeholder="Buscar en meseros...">
+                    <label for="buscarMeseros" class="form-label justify-content-start">Buscar mesero por ID</label>
+                    <input type="text" id="buscarMeseros" class="form-control" placeholder="Buscar mesero por ID...">
                 </div>
                 <div class="miTabla mb-5 col-12 m-auto">
                     <table class="container table table-striped table-bordered border-info text-center" id="tablaMeseros">
@@ -219,7 +223,8 @@
                     <h3>Categorías</h3>
                 </div>
                 <div class="mb-3 col-10 col-xxl-3">
-                    <input type="text" id="buscarCategorias" class="form-control" placeholder="Buscar en categorías...">
+                    <label for="buscarCategorias" class="form-label justify-content-start">Buscar categoría por ID</label>
+                    <input type="text" id="buscarCategorias" class="form-control" placeholder="Buscar categoría por ID...">
                 </div>
                 <div class="miTabla mb-5 col-12 m-auto">
                     <table class="container table table-striped table-bordered border-info text-center" id="tablaCategorias">
@@ -363,6 +368,50 @@
                             <input type="text" class="form-control" id="editarNombreCategoria" required>
                             <div class="invalid-feedback">
                                 por favor ingresa un nombre de categoria
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal para editar venta -->
+    <div class="modal fade" id="modalEditarVenta" tabindex="-1" aria-labelledby="modalEditarVentaLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEditarVentaLabel">Editar Venta</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formEditarVenta" class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="editarProductoVenta" class="form-label">Producto</label>
+                            <select id="editarProductoVenta" class="form-select" required></select>
+                            <div class="invalid-feedback">
+                                por favor selecciona un producto
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editarCantidadVenta" class="form-label">Cantidad</label>
+                            <input type="number" id="editarCantidadVenta" class="form-control" min="1" required>
+                            <div class="invalid-feedback">
+                                por favor ingresa una cantidad
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editarMeseroVenta" class="form-label">Mesero</label>
+                            <select id="editarMeseroVenta" class="form-select" required></select>
+                            <div class="invalid-feedback">
+                                por favor selecciona un mesero
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editarFechaVenta" class="form-label">Fecha</label>
+                            <input type="date" id="editarFechaVenta" class="form-control" required>
+                            <div class="invalid-feedback">
+                                por favor selecciona una fecha
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar Cambios</button>
