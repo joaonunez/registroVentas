@@ -129,12 +129,31 @@ function abrirModalEditarVenta(index) {
     document.getElementById('editarFechaVenta').value = venta.getFecha;
     document.getElementById('formEditarVenta').onsubmit = function(event) {
         event.preventDefault();
-        editarVenta(index);
-        $('#modalEditarVenta').modal('hide');
-        Swal.fire('Cambios guardados satisfactoriamente', '', 'success');
+        if (validarFormularioModal('formEditarVenta')) {
+            editarVenta(index);
+            $('#modalEditarVenta').modal('hide');
+            Swal.fire('Cambios guardados satisfactoriamente', '', 'success');
+        }
     };
     $('#modalEditarVenta').modal('show');
 }
+
+function validarFormularioModal(formId) {
+    const form = document.getElementById(formId);
+    const inputs = form.querySelectorAll('input, select');
+    let isValid = true;
+    inputs.forEach(input => {
+        if (!input.value) {
+            input.classList.add('is-invalid');
+            isValid = false;
+        } else {
+            input.classList.remove('is-invalid');
+            input.classList.add('is-valid');
+        }
+    });
+    return isValid;
+}
+
 
 function editarVenta(index) {
     let venta = ventas[index];

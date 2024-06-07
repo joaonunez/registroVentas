@@ -103,12 +103,15 @@ function abrirModalEditarProducto(index) {
     document.getElementById('editarPrecioProducto').value = producto.getPrecio;
     document.getElementById('formEditarProducto').onsubmit = function(event) {
         event.preventDefault();
-        editarProducto(index);
-        $('#modalEditarProducto').modal('hide');
-        Swal.fire('Producto modificado', 'El producto ha sido modificado correctamente', 'success');
+        if (validarFormularioModal('formEditarProducto')) {
+            editarProducto(index);
+            $('#modalEditarProducto').modal('hide');
+            Swal.fire('Producto modificado', 'El producto ha sido modificado correctamente', 'success');
+        }
     };
     $('#modalEditarProducto').modal('show');
 }
+
 
 function editarProducto(index) {
     let producto = productos[index];

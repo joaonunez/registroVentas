@@ -80,12 +80,15 @@ function abrirModalEditarMesero(index) {
     document.getElementById('editarNombreMesero').value = mesero.getNombre;
     document.getElementById('formEditarMesero').onsubmit = function(event) {
         event.preventDefault();
-        editarMesero(index);
-        $('#modalEditarMesero').modal('hide');
-        Swal.fire('Mesero modificado', 'El mesero ha sido modificado correctamente', 'success');
+        if (validarFormularioModal('formEditarMesero')) {
+            editarMesero(index);
+            $('#modalEditarMesero').modal('hide');
+            Swal.fire('Mesero modificado', 'El mesero ha sido modificado correctamente', 'success');
+        }
     };
     $('#modalEditarMesero').modal('show');
 }
+
 
 function editarMesero(index) {
     let mesero = meseros[index];

@@ -72,12 +72,15 @@ function abrirModalEditarCategoria(index) {
     document.getElementById('editarNombreCategoria').value = categoria.getNombre;
     document.getElementById('formEditarCategoria').onsubmit = function(event) {
         event.preventDefault();
-        editarCategoria(index);
-        $('#modalEditarCategoria').modal('hide');
-        Swal.fire('Categoría modificada', 'La categoría ha sido modificada correctamente', 'success');
+        if (validarFormularioModal('formEditarCategoria')) {
+            editarCategoria(index);
+            $('#modalEditarCategoria').modal('hide');
+            Swal.fire('Categoría modificada', 'La categoría ha sido modificada correctamente', 'success');
+        }
     };
     $('#modalEditarCategoria').modal('show');
 }
+
 
 function editarCategoria(index) {
     let categoria = categorias[index];
