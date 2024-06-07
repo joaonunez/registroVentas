@@ -1,4 +1,3 @@
-// Clase Categoria
 class Categoria {
     constructor(id, nombre) {
         this._id = id;

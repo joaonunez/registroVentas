@@ -42,6 +42,36 @@ function actualizarTablaMeseros() {
     });
 }
 
+function abrirModalEditarMesero(index) {
+    let mesero = meseros[index];
+    document.getElementById('editarRutMesero').value = mesero.getRut;
+    document.getElementById('editarNombreMesero').value = mesero.getNombre;
+    document.getElementById('formEditarMesero').onsubmit = function(event) {
+        event.preventDefault();
+        editarMesero(index);
+        $('#modalEditarMesero').modal('hide');
+        Swal.fire('Mesero modificado', 'El mesero ha sido modificado correctamente', 'success');
+    };
+    $('#modalEditarMesero').modal('show');
+}
+
+function editarMesero(index) {
+    let mesero = meseros[index];
+    let newRut = document.getElementById('editarRutMesero').value;
+    let newNombre = document.getElementById('editarNombreMesero').value;
+    mesero.setRut = newRut;
+    mesero.setNombre = newNombre;
+    actualizarTablaMeseros();
+    actualizarDropdownMeseros();
+}
+
+function eliminarMesero(index) {
+    meseros.splice(index, 1);
+    actualizarTablaMeseros();
+    actualizarDropdownMeseros();
+    Swal.fire('Mesero eliminado', 'El mesero ha sido eliminado correctamente', 'success');
+}
+
 function actualizarTablaProductos() {
     let tbody = document.getElementById('tablaProductos2').getElementsByTagName('tbody')[0];
     tbody.innerHTML = '';
@@ -74,6 +104,40 @@ function actualizarTablaProductos() {
     });
 }
 
+function abrirModalEditarProducto(index) {
+    let producto = productos[index];
+    document.getElementById('editarNombreProducto').value = producto.getNombre;
+    document.getElementById('editarCategoriaProducto').value = producto.getCategoria.getId;
+    document.getElementById('editarPrecioProducto').value = producto.getPrecio;
+    document.getElementById('formEditarProducto').onsubmit = function(event) {
+        event.preventDefault();
+        editarProducto(index);
+        $('#modalEditarProducto').modal('hide');
+        Swal.fire('Producto modificado', 'El producto ha sido modificado correctamente', 'success');
+    };
+    $('#modalEditarProducto').modal('show');
+}
+
+function editarProducto(index) {
+    let producto = productos[index];
+    let newNombre = document.getElementById('editarNombreProducto').value;
+    let newCategoriaId = document.getElementById('editarCategoriaProducto').value;
+    let newCategoria = categorias.find(cat => cat.getId == newCategoriaId);
+    let newPrecio = document.getElementById('editarPrecioProducto').value;
+    producto.setNombre = newNombre;
+    producto.setCategoria = newCategoria;
+    producto.setPrecio = parseInt(newPrecio);
+    actualizarTablaProductos();
+    actualizarDropdownProductos();
+}
+
+function eliminarProducto(index) {
+    productos.splice(index, 1);
+    actualizarTablaProductos();
+    actualizarDropdownProductos();
+    Swal.fire('Producto eliminado', 'El producto ha sido eliminado correctamente', 'success');
+}
+
 function actualizarTablaCategorias() {
     let tbody = document.getElementById('tablaCategorias').getElementsByTagName('tbody')[0];
     tbody.innerHTML = '';
@@ -103,8 +167,31 @@ function actualizarTablaCategorias() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    actualizarTablaMeseros();
-    actualizarTablaProductos();
+function abrirModalEditarCategoria(index) {
+    let categoria = categorias[index];
+    document.getElementById('editarNombreCategoria').value = categoria.getNombre;
+    document.getElementById('formEditarCategoria').onsubmit = function(event) {
+        event.preventDefault();
+        editarCategoria(index);
+        $('#modalEditarCategoria').modal('hide');
+        Swal.fire('Categoría modificada', 'La categoría ha sido modificada correctamente', 'success');
+    };
+    $('#modalEditarCategoria').modal('show');
+}
+
+function editarCategoria(index) {
+    let categoria = categorias[index];
+    let newNombre = document.getElementById('editarNombreCategoria').value;
+    categoria.setNombre = newNombre;
     actualizarTablaCategorias();
-});
+    actualizarDropdownCategorias();
+}
+
+function eliminarCategoria(index) {
+    categorias.splice(index, 1);
+    actualizarTablaCategorias();
+    actualizarDropdownCategorias();
+    Swal.fire('Categoría eliminada', 'La categoría ha sido eliminada correctamente', 'success');
+}
+
+document.getElementById('verProductos').addEventListener('shown.bs.modal', mostrarProductos);

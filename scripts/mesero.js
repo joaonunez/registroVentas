@@ -1,4 +1,3 @@
-// Clase Mesero
 class Mesero {
     constructor(rut, nombre) {
         this._rut = rut;
