@@ -93,7 +93,7 @@ function eliminarCategoria(index) {
     categorias.splice(index, 1); // elimina la categoria del array
     actualizarTablaCategorias(); // actualiza la tabla de categorias
     actualizarDropdownCategorias(); // actualiza el dropdown de categorias
-    Swal.fire('Categoría eliminada', 'La categoría ha sido eliminada correctamente', 'success'); // muestra un mensaje de exito
+    Swal.fire('Categoría eliminada', 'La categoría ha sido eliminada', 'success'); // muestra un mensaje de exito
 }
 
 function validarYAgregarCategoria() {
